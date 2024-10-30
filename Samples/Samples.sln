@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InjectManifestAndWriteData"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcquireSignals", "AcquireSignals\AcquireSignals.csproj", "{1F4B8256-C375-40A4-A23E-55E348168CC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetQueryResults", "GetQueryResults\GetQueryResults.csproj", "{28A07358-FBEC-4BA1-863A-907B7D995C5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1F4B8256-C375-40A4-A23E-55E348168CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F4B8256-C375-40A4-A23E-55E348168CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F4B8256-C375-40A4-A23E-55E348168CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A07358-FBEC-4BA1-863A-907B7D995C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A07358-FBEC-4BA1-863A-907B7D995C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A07358-FBEC-4BA1-863A-907B7D995C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A07358-FBEC-4BA1-863A-907B7D995C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,9 +24,6 @@ IOPCUADWISClient client = new DWISClientOPCF(configuration, loggerFactory.Create
 
 var subscriptionData = GetSubscriptionData();
 
-
-
-
 AcquiredSignals acquiredSignals = AcquiredSignals.CreateWithSubscription(subscriptionData.queries, subscriptionData.queryNames, 0, client);
 
 PeriodicTimer timer = new PeriodicTimer(TimeSpan.FromSeconds(.5));
@@ -40,8 +37,8 @@ while (await timer.WaitForNextTickAsync())
         Console.WriteLine($"Signal name: {data.Key}");
 
         if (val != null)
-        { 
-        foreach(var signal in val)
+        {
+            foreach (var signal in val)
             {
                 double s = signal.GetValue<double>(double.NaN);
                 Console.WriteLine($"\t Value: {s}");
