@@ -18,6 +18,9 @@
     <Content Update="C:\Users\beda\.nuget\packages\dwis.client.referenceimplementation.opcfoundation\2.1.6\contentFiles\any\net8.0\config\Quickstarts.ReferenceClient.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="C:\Users\beda\.nuget\packages\dwis.client.referenceimplementation.opcfoundation\2.1.7\contentFiles\any\net8.0\config\Quickstarts.ReferenceClient.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
