@@ -18,7 +18,10 @@ var logger = loggerFactory.CreateLogger<Program>();
 
 
 var configuration = DefaultDWISClientConfiguration.LoadDefault();
-
+if (args != null && args.Length == 1)
+{
+    configuration.ServerAddress = args[0];
+}
 IOPCUADWISClient client = new DWISClientOPCF(configuration, loggerFactory.CreateLogger<DWISClientOPCF>());
 var manifest = GetManifest();
 
@@ -29,12 +32,18 @@ logger.LogInformation("Manifest injected");
 
 
 Random random = new Random();
-
+int prefix = random.Next();
 PeriodicTimer periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(.5));
 while (await periodicTimer.WaitForNextTickAsync()) 
 {
     DateTime now = DateTime.Now;
-    var data = manifest.ProvidedVariables.Select(pv => (pv.VariableID,(object) random.NextDouble(), now)).ToList();
+    var data = manifest.ProvidedVariables.Select(pv => (pv.VariableID,(object)(prefix + random.NextDouble()), now)).ToList();
+
+    foreach (var d in data)
+    {
+        logger.LogInformation($"Write data: {d.VariableID}, {d.Item2}");
+    }
+
     client.UpdateProvidedVariables(data);
 }
 

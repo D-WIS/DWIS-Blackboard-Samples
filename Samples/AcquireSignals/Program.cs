@@ -18,7 +18,10 @@ var logger = loggerFactory.CreateLogger<Program>();
 
 
 var configuration = DefaultDWISClientConfiguration.LoadDefault();
-
+if (args != null && args.Length == 1)
+{
+    configuration.ServerAddress = args[0];
+}
 IOPCUADWISClient client = new DWISClientOPCF(configuration, loggerFactory.CreateLogger<DWISClientOPCF>());
 
 
