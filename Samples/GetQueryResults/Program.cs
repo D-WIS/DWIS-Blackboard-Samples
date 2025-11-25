@@ -21,8 +21,14 @@ var logger = loggerFactory.CreateLogger<Program>();
 //var voc = DWIS.Vocabulary.sta
 
 var configuration = DefaultDWISClientConfiguration.LoadDefault();
+if (args != null && args.Length == 1)
+{
+    configuration.ServerAddress = args[0];
+}
 
 IOPCUADWISClient client = new DWISClientOPCF(configuration, loggerFactory.CreateLogger<DWISClientOPCF>());
+
+
 
 bool quit = false;
 
