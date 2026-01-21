@@ -33,7 +33,7 @@ WHERE {
 }
 ```
 - `print-query SPP -m true -d true`: shows the SparQL query asking for a **Measured** SPP, and the corresponding data point in addition to the signal:
-```
+```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX ddhub: <http://ddhub.no/>
 
