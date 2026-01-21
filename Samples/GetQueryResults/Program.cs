@@ -18,7 +18,7 @@ var host = builder.Build();
 var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
 var logger = loggerFactory.CreateLogger<Program>();
 
-//var voc = DWIS.Vocabulary.sta
+
 
 var configuration = DefaultDWISClientConfiguration.LoadDefault();
 if (args != null && args.Length == 1)
@@ -37,38 +37,53 @@ string lineStart = "dwis-blackboard> ";
 var rootCommand = new RootCommand("Sample app for get query results method");
 
 var printQueryCommand = new Command("print-query");
-rootCommand.AddCommand(printQueryCommand);
+rootCommand.Subcommands.Add(printQueryCommand);
 
 var printResultsCommand = new Command("print-query-results");
-rootCommand.AddCommand(printResultsCommand);
+rootCommand.Subcommands.Add(printResultsCommand);
 
-var prototypeArgument = new Argument<string>("prototype", "The prototype noun to be used");
-var measurementOption = new Option<bool>("-m", getDefaultValue: () => false, description:"Add the ddhub:Measurement pattern to the query.");
-var getUnitsOptions = new Option<bool>("-u", getDefaultValue: () => false);
-var getSignalOptions = new Option<bool>("-s", getDefaultValue: () => true);
-var getDataPointOptions = new Option<bool>("-d", getDefaultValue: () => true);
+var prototypeArgument = new Argument<string>("prototype") { Description = "The prototype noun to be used" };
+var measurementOption = new Option<bool>("-m")
+{
+    DefaultValueFactory = (b) => false,
+    Description = "Add the ddhub:Measurement pattern to the query."
+};//,  getDefaultValue: () => false, description:"Add the ddhub:Measurement pattern to the query.");
+var getUnitsOptions = new Option<bool>("-u") { DefaultValueFactory = (b) => false };
+var getSignalOptions = new Option<bool>("-s") { DefaultValueFactory = (b) => true };
+var getDataPointOptions = new Option<bool>("-d") { DefaultValueFactory = (b) => false };
 
-printQueryCommand.AddArgument(prototypeArgument);
-printQueryCommand.AddOption(measurementOption);
-printQueryCommand.AddOption(getUnitsOptions);
-printQueryCommand.AddOption(getSignalOptions);
-printQueryCommand.AddOption(getDataPointOptions);
-printQueryCommand.SetHandler(PrintQuery, prototypeArgument, measurementOption, getUnitsOptions, getSignalOptions, getDataPointOptions);
+printQueryCommand.Arguments.Add(prototypeArgument);
+printQueryCommand.Options.Add(measurementOption);
+printQueryCommand.Options.Add(getUnitsOptions);
+printQueryCommand.Options.Add(getSignalOptions);
+printQueryCommand.Options.Add(getDataPointOptions);
+printQueryCommand.SetAction( parseResults =>      
+    PrintQuery(
+        parseResults.GetValue(prototypeArgument), 
+        parseResults.GetValue(measurementOption), 
+        parseResults.GetValue(getUnitsOptions), 
+        parseResults.GetValue(getSignalOptions), 
+        parseResults.GetValue(getDataPointOptions)));
 
 
-printResultsCommand.AddArgument(prototypeArgument);
-printResultsCommand.AddOption(measurementOption);
-printResultsCommand.AddOption(getUnitsOptions);
-printResultsCommand.AddOption(getSignalOptions);
-printResultsCommand.AddOption(getDataPointOptions);
-printResultsCommand.SetHandler(PrintQueryResults, prototypeArgument, measurementOption, getUnitsOptions, getSignalOptions, getDataPointOptions);
-
+printResultsCommand.Arguments.Add(prototypeArgument);
+printResultsCommand.Options.Add(measurementOption);
+printResultsCommand.Options.Add(getUnitsOptions);
+printResultsCommand.Options.Add(getSignalOptions);
+printResultsCommand.Options.Add(getDataPointOptions);
+printResultsCommand.SetAction(parseResults =>
+    PrintQueryResults(
+        parseResults.GetValue(prototypeArgument),
+        parseResults.GetValue(measurementOption),
+        parseResults.GetValue(getUnitsOptions),
+        parseResults.GetValue(getSignalOptions),
+        parseResults.GetValue(getDataPointOptions)));
 
 //quit
 var exitCommand = new Command("exit");
-exitCommand.AddAlias("quit");
-exitCommand.SetHandler(() => quit = true);
-rootCommand.AddCommand(exitCommand);
+exitCommand.Aliases.Add("quit");
+exitCommand.SetAction(parseResults => quit = true);
+rootCommand.Subcommands.Add(exitCommand);
 
 AnsiConsole.Write(
 new FigletText("D-WIS Blackboard")
@@ -81,7 +96,7 @@ while (!quit)
     string? rd = Console.ReadLine();
     if (!string.IsNullOrEmpty(rd))
     {
-        await rootCommand.InvokeAsync(rd.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+        await rootCommand.Parse(rd.Split(' ', StringSplitOptions.RemoveEmptyEntries)).InvokeAsync();
     }
 }
 
@@ -91,16 +106,24 @@ string GetQuery(string prototype, bool measurement, bool getunits, bool getsigna
     QueryBuilder queryBuilder = new QueryBuilder();
     if (getsignal) { queryBuilder.SelectSignal(); }
     if (getdatapoint) { queryBuilder.SelectDataPoint(); }
+    if (getunits) {  queryBuilder.SelectUnit(); }
     if (measurement) { queryBuilder.AddMeasuredClass(prototype); }
     else { queryBuilder.AddClasses(prototype); }
 
     return queryBuilder.Build();
 }
 
-void PrintQuery(string prototype, bool measurement, bool getunits, bool getsignal, bool getdatapoint)
+void PrintQuery(string? prototype, bool measurement, bool getunits, bool getsignal, bool getdatapoint)
 {
-    string query = GetQuery(prototype, measurement, getunits, getsignal, getdatapoint);
-    Console.WriteLine(query);   
+    if (!string.IsNullOrEmpty(prototype))
+    {
+        string query = GetQuery(prototype, measurement, getunits, getsignal, getdatapoint);
+        Console.WriteLine(query);
+    }
+    else 
+    {
+        Console.WriteLine("Prototype cannot be null or empty");
+    }
 }
 
 void PrintQueryResults(string prototype, bool measurement, bool getunits, bool getsignal, bool getdatapoint)
