@@ -44,7 +44,7 @@ WHERE {
                         ?dataPoint rdf:type ddhub:SPP .
 }
 ```
--`print-query-results SPP -d true -m true`: displays the results of the query. Depending of the contents of your blackboard, the result can look like: 
+- `print-query-results SPP -d true -m true`: displays the results of the query. Depending of the contents of your blackboard, the result can look like: 
 ```
 ┌───────────────────────────────────────────────┬─────────────────────────────┐
 │ ?SIGNAL                                       │ ?DATAPOINT                  │
