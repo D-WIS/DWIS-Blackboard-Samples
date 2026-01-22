@@ -2,10 +2,10 @@
 Sample .NET 8 console apps showing how to interact with the DWIS semantic blackboard using the reference client.
 
 ## Samples
-- `Samples/AcquireSignals/` � subscribe to signals via SPARQL query, print values periodically.
-- `Samples/GetQueryResults/` � resolve SPARQL queries and display results (includes sample OPC UA config in `config/`).
-- `Samples/InjectManifestAndWriteData/` � inject a manifest, then update provided variables periodically (sample OPC UA config in `config/`).
-- `Samples/Samples.sln` � solution for building all samples.
+- `Samples/AcquireSignals/`: subscribe to signals via SPARQL query, print values periodically.
+- `Samples/GetQueryResults/`: resolve SPARQL queries and display results (includes sample OPC UA config in `config/`).
+- `Samples/InjectManifestAndWriteData/`: inject a manifest, then update provided variables periodically (sample OPC UA config in `config/`).
+- `Samples/Samples.sln`: solution for building all samples.
 
 ## Build & run
 From `Samples/`:
@@ -14,7 +14,7 @@ From `Samples/`:
 
 ## Prereqs
 - DWIS Blackboard reachable via OPC UA.
-- `Quickstarts.ReferenceClient.Config.xml` in each sample�s `config/` points to your server; adjust endpoints/credentials as needed. **Important: you may have to change the `Copy to Output Directory` property of the configuration file to `Copy if newer`, or `Copy always`**
+- `Quickstarts.ReferenceClient.Config.xml` in each sample's `config/` points to your server; adjust endpoints/credentials as needed. **Important: you may have to change the `Copy to Output Directory` property of the configuration file to `Copy if newer`, or `Copy always`**
 - Reference client packages resolved via NuGet; 
 
 ## Examples
