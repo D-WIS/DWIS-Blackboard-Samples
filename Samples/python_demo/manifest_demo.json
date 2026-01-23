@@ -1,0 +1,252 @@
+{
+  "ManifestName": "Example_manifest",
+  "Provider": {
+    "Name": "Sample_application",
+    "Company": "NORCE"
+  },
+  "InjectionInformation": {
+    "ServerName": null,
+    "EndPointURL": null,
+    "PublishingIntervalInMS": 0.0,
+    "InjectedVariablesNamespaceAlias": "Variables",
+    "InjectedNodesNamespaceAlias": "Nodes",
+    "ProvidedVariablesNamespaceAlias": "ProvidedVariables"
+  },
+  "InjectedVariables": [],
+  "InjectedNodes": [
+    {
+      "TypeDictionaryURI": "http://ddhub.no/DrillingDataPoint",
+      "BrowseName": null,
+      "UniqueName": "SPP_0",
+      "DisplayName": "SPP_0",
+      "Fields": [
+        {
+          "FieldName": "IsValid",
+          "FieldValue": null
+        }
+      ]
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/StandPipe",
+      "BrowseName": null,
+      "UniqueName": "StandPipe_0",
+      "DisplayName": "StandPipe_0",
+      "Fields": null
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/SPPQuantity",
+      "BrowseName": null,
+      "UniqueName": "SPPQuantity_0",
+      "DisplayName": "SPPQuantity_0",
+      "Fields": null
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/SensorUncertainty",
+      "BrowseName": null,
+      "UniqueName": "SPPUncertainty_0",
+      "DisplayName": "SPPUncertainty_0",
+      "Fields": [
+        {
+          "FieldName": "Accuracy",
+          "FieldValue": null
+        },
+        {
+          "FieldName": "Precision",
+          "FieldValue": null
+        }
+      ]
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/LowPassFilter",
+      "BrowseName": null,
+      "UniqueName": "SPP_LowPassFilter",
+      "DisplayName": "SPP_LowPassFilter",
+      "Fields": [
+        {
+          "FieldName": "CutOffFrequency",
+          "FieldValue": null
+        }
+      ]
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/DataProvider",
+      "BrowseName": null,
+      "UniqueName": "DrillingControlSystem_0",
+      "DisplayName": "DrillingControlSystem_0",
+      "Fields": [
+        {
+          "FieldName": "ProviderName",
+          "FieldValue": null
+        }
+      ]
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/Location",
+      "BrowseName": null,
+      "UniqueName": "StandPipeLocation",
+      "DisplayName": "StandPipeLocation",
+      "Fields": null
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/DrillFloorReferenceLocation",
+      "BrowseName": null,
+      "UniqueName": "DrillFloorLocation",
+      "DisplayName": "DrillFloorLocation",
+      "Fields": null
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/DrillingDataPoint",
+      "BrowseName": null,
+      "UniqueName": "StandPipeElevation",
+      "DisplayName": "StandPipeElevation",
+      "Fields": [
+        {
+          "FieldName": "IsValid",
+          "FieldValue": null
+        }
+      ]
+    },
+    {
+      "TypeDictionaryURI": "http://ddhub.no/VerticalElevationReferenceFrame",
+      "BrowseName": null,
+      "UniqueName": "ElevationReferenceFrame",
+      "DisplayName": "ElevationReferenceFrame",
+      "Fields": null
+    }
+  ],
+  "InjectedReferences": [
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/IsProvidedBy",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "DrillingControlSystem_0"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/IsHydraulicallyLocatedAt",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "StandPipe_0"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/IsOfMeasurableQuantity",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "SPPQuantity_0"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/IsGeneratedBy",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_LowPassFilter"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/HasUncertainty",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "SPPUncertainty_0"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/HasElevationReference",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "StandPipeLocation"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/IsPhysicallyLocatedAt",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "StandPipeLocation"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "StandPipeLocation"
+      },
+      "VerbURI": "http://ddhub.no/HasCoordinates",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "StandPipeElevation"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "StandPipeLocation"
+      },
+      "VerbURI": "http://ddhub.no/HasReferenceFrame",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "ElevationReferenceFrame"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "ElevationReferenceFrame"
+      },
+      "VerbURI": "http://ddhub.no/HasReferenceFrameOrigin",
+      "Object": {
+        "NameSpace": "Nodes",
+        "ID": "DrillFloorLocation"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/BelongsToClass",
+      "Object": {
+        "NameSpace": "http://ddhub.no/",
+        "ID": "SPP"
+      }
+    },
+    {
+      "Subject": {
+        "NameSpace": "Nodes",
+        "ID": "SPP_0"
+      },
+      "VerbURI": "http://ddhub.no/BelongsToClass",
+      "Object": {
+        "NameSpace": "http://ddhub.no/",
+        "ID": "Measurement"
+      }
+    }
+  ],
+  "ProvidedVariables": null
+}
